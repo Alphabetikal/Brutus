@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/dash.css') }}">
+
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <p id="head">Refer & Earn</p>
+      <span>
+        <button class="btn" onclick="showContainer()">Generate Link</button>
+      </span>
+    </div>
+
+    <!-- Profile Image -->
+    <div class="image">
+      <img src="profile.jpg" alt="E-football">
+    </div>
+    
+    <!-- Popup container -->
+    <div class="container" id="container">
+      <p>Copy the link below 👇</p>
+      <p>{server_url}</p>
+      <p id="expiryText">Link expires in <span id="timer">60</span> sec</p>
+    </div>
+
+    <!-- Footer referral message -->
+    <div class="footer">
+      ⏳ Hurry! Share this E-Football link with a KONAMI player within the next 
+      <span>60 seconds</span> and grab <span>5,000 coins</span> ⚽💰
+    </div>
+  </body>
+<script>
+  let countdown; // keep track of timer
+
+  function showContainer() {
+    document.getElementById("container").style.display = "flex";
+    startTimer();
+  }
+
+  function startTimer() {
+    clearInterval(countdown); // reset any old timer
+
+    let timeLeft = 60;
+    const timerDisplay = document.getElementById("timer");
+    const expiryText = document.getElementById("expiryText");
+
+    // Reset initial state
+    timerDisplay.textContent = timeLeft;
+    expiryText.innerHTML = `Link expires in <span id="timer">${timeLeft}</span> sec`;
+
+    countdown = setInterval(() => {
+      timeLeft--;
+      if (timeLeft > 0) {
+        document.getElementById("timer").textContent = timeLeft;
+      } else {
+        clearInterval(countdown);
+        expiryText.textContent = "Link expired ⛔";
+      }
+    }, 1000);
+  }
+</script>
+</html>
