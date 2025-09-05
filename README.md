@@ -1,5 +1,5 @@
 # Brutus
-Phishing.....
+**Phishing**.....
 
 A **cybersecurity educational project** that demonstrates how phishing techniques can be simulated in a controlled environment for awareness training, penetration testing, and defensive research.
 
