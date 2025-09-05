@@ -27,4 +27,4 @@ def dashboard():
     content=f.read()
   return render_template('dashboard.html',server_url=content)
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(port=5000)#Replace with your localtonet port
